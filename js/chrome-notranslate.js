@@ -12,9 +12,20 @@ var defailtSelectors = [ "pre", "code", ".line", ".lines" ];
 
 // ドキュメント準備完了時に実行
 $(document).ready(function() {
-	log("Start.");
+	log("document ready Start.");
 	setNotranslate(defailtSelectors);
-	log("End.");
+	log("document ready End.");
+});
+
+// 要素の追加時に実行
+$("body").bind("DOMNodeInserted", function(e) {
+	var element = e.target;
+	setTimeout(function() {
+		log("body DOMNodeInserted Start.");
+		setNotranslate(defailtSelectors, element);
+		log("body DOMNodeInserted End.");
+	}, 100);	// TODO 実行タイミングの精査
+	log("body DOMNodeInserted Set.");
 });
 
 /**
@@ -22,12 +33,17 @@ $(document).ready(function() {
  *
  * @param selectors
  *            翻訳対象外とする要素のセレクタ(Sizzle)の配列
+ * @param context
+ *            翻訳対象外とする要素のコンテキスト(省略時<c>document</d>)
  */
-function setNotranslate(selectors) {
+function setNotranslate(selectors, context) {
+	if (!context) {
+		context = document
+	}
 	var i;
 	var elms;
 	for (i = 0; i < selectors.length; i++) {
-		elms = $(selectors[i]).addClass("notranslate");
+		elms = $(selectors[i], context).addClass("notranslate");
 		log("Set 'notranslate' class to " + elms.length + " elements by '"
 				+ selectors[i] + "'.");
 	}
