@@ -1,0 +1,47 @@
+// 参考：
+// http://www.casleyconsulting.co.jp/blog-engineer/chrome/chrome%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E3%81%AE%E4%BD%9C%E6%88%90%E6%96%B9%E6%B3%95-2/
+// http://blog.fenrir-inc.com/jp/2012/09/jquery-chrome-extension.html
+// http://dev.screw-axis.com/doc/chrome_extensions/
+
+/**
+ * 翻訳対象外とする要素のデフォルトセレクタ(Sizzle)。
+ *
+ * TODO 設定可能とするように修正(オプションページ作成)
+ */
+var defailtSelectors = [ "pre", "code", ".line", ".lines" ];
+
+// ドキュメント準備完了時に実行
+$(document).ready(function() {
+	log("Start.");
+	setNotranslate(defailtSelectors);
+	log("End.");
+});
+
+/**
+ * 指定したセレクタ配列に一致する要素がChromeで翻訳されないように設定する。
+ *
+ * @param selectors
+ *            翻訳対象外とする要素のセレクタ(Sizzle)の配列
+ */
+function setNotranslate(selectors) {
+	var i;
+	var elms;
+	for (i = 0; i < selectors.length; i++) {
+		elms = $(selectors[i]).addClass("notranslate");
+		log("Set 'notranslate' class to " + elms.length + " elements by '"
+				+ selectors[i] + "'.");
+	}
+}
+
+/**
+ * コンソールにログを出力する。
+ *
+ * TODO デベロッパーモードかどうかの判定及びdebug実装
+ *
+ * @param logValue
+ *            出力内容
+ */
+function log(logValue) {
+	// console.log("chrome-notranslate, " + (new Date()) + "," + logValue);
+	console.log("chrome-notranslate, " + logValue);
+}

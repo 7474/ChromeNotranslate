@@ -1,0 +1,17 @@
+{
+	"manifest_version": 2,
+	"name": "Chrome Notranslate",
+	"version": "0.1",
+	"description": "Chromeの翻訳機能の適用対象外要素を設定する。",
+	"icons": {
+		"16": "icons/icon.png",
+		"48": "icons/icon.png",
+		"128": "icons/icon.png"
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*"],
+			"js": ["js/jquery-2.0.3.min.js", "js/chrome-notranslate.js"]
+		}
+	]
+}
