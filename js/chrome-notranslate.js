@@ -3,17 +3,18 @@
 // http://blog.fenrir-inc.com/jp/2012/09/jquery-chrome-extension.html
 // http://dev.screw-axis.com/doc/chrome_extensions/
 
-/**
- * 翻訳対象外とする要素のデフォルトセレクタ(Sizzle)。
- *
- * TODO 設定可能とするように修正(オプションページ作成)
- */
-var defailtSelectors = [ "pre", "code", ".line", ".lines" ];
+// 設定を取得
+var options;
+chrome.extension.sendRequest({
+	method : "getChromeNotranslateOptions"
+}, function(response) {
+	options = response;
+});
 
 // ドキュメント準備完了時に実行
 $(document).ready(function() {
 	log("document ready Start.");
-	setNotranslate(defailtSelectors);
+	setNotranslate(options.selectors);
 	log("document ready End.");
 });
 
@@ -22,9 +23,9 @@ $("body").bind("DOMNodeInserted", function(e) {
 	var element = e.target;
 	setTimeout(function() {
 		log("body DOMNodeInserted Start.");
-		setNotranslate(defailtSelectors, element);
+		setNotranslate(options.selectors, element);
 		log("body DOMNodeInserted End.");
-	}, 100);	// TODO 実行タイミングの精査
+	}, 100); // TODO 実行タイミングの精査
 	log("body DOMNodeInserted Set.");
 });
 
