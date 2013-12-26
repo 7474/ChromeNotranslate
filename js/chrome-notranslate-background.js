@@ -1,7 +1,10 @@
+/*
+ * Chrome Notranslateのバックグラウンド動作スクリプト。
+ * オプション設定の保持と提供を行う。
+ */
+
 /**
  * 翻訳対象外とする要素のデフォルトセレクタ(Sizzle)。
- *
- * TODO 設定可能とするように修正(オプションページ作成)
  */
 var defailtSelectors = [ "pre", "code", ".line", ".lines" ];
 

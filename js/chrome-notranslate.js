@@ -1,32 +1,37 @@
-// 参考：
-// http://www.casleyconsulting.co.jp/blog-engineer/chrome/chrome%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E3%81%AE%E4%BD%9C%E6%88%90%E6%96%B9%E6%B3%95-2/
-// http://blog.fenrir-inc.com/jp/2012/09/jquery-chrome-extension.html
-// http://dev.screw-axis.com/doc/chrome_extensions/
+/*
+ * Chrome Notranslateの主スクリプト。
+ * 設定にもとづいてChromeの翻訳対象外要素を設定する。
+ */
 
-// 設定を取得
+/** オプション設定 */
 var options;
-chrome.extension.sendRequest({
-	method : "getChromeNotranslateOptions"
-}, function(response) {
-	options = response;
-});
 
 // ドキュメント準備完了時に実行
 $(document).ready(function() {
-	log("document ready Start.");
-	setNotranslate(options.selectors);
-	log("document ready End.");
-});
+	// 設定を取得
+	chrome.extension.sendRequest({
+		method : "getChromeNotranslateOptions"
+	}, function(response) {
+		log("getChromeNotranslateOptions reponse Start.");
 
-// 要素の追加時に実行
-$("body").bind("DOMNodeInserted", function(e) {
-	var element = e.target;
-	setTimeout(function() {
-		log("body DOMNodeInserted Start.");
-		setNotranslate(options.selectors, element);
-		log("body DOMNodeInserted End.");
-	}, 100); // TODO 実行タイミングの精査
-	log("body DOMNodeInserted Set.");
+		// 取得した設定を保持
+		options = response;
+
+		// 要素の追加時にnotranslate設定実行
+		$("body").bind("DOMNodeInserted", function(e) {
+			var element = e.target;
+			setTimeout(function() {
+				log("body DOMNodeInserted Start.");
+				setNotranslate(options.selectors, element);
+				log("body DOMNodeInserted End.");
+			}, 100); // TODO 実行タイミングの精査
+		});
+
+		// オプション取得後に初期notranslate設定
+		setNotranslate(options.selectors);
+
+		log("getChromeNotranslateOptions response End.");
+	});
 });
 
 /**

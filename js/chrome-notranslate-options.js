@@ -1,3 +1,7 @@
+/*
+ * Chrome Notranslateのオプション設定用スクリプト。
+ */
+
 $(function() {
 	// イベント設定
 	$("#button-add").click(function() {
@@ -47,7 +51,9 @@ function saveOption() {
 /**
  * 画面上に設定入力項目を追加する。
  *
- * @returns 追加された設定入力項目のjQueryオブジェクト
+ * @returns 追加された設定入力項目のjQueryオブジェクト。オブジェクトには1つのinput要素が含まれる。
+ *
+ * TODO inputが含まれることはHTMLの実装に依存する
  */
 function addSelectorInputBox() {
 	return $("#template .input-selector-li").clone().appendTo(

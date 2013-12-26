@@ -11,7 +11,7 @@
 	"content_scripts": [
 		{
 			"matches": ["http://*/*", "https://*/*"],
-			"js": ["js/jquery-2.0.3.min.js", "js/chrome-notranslate-background.js", "js/chrome-notranslate.js"]
+			"js": ["js/jquery-2.0.3.min.js", "js/chrome-notranslate.js"]
 		}
 	],
 	"background": {
@@ -19,6 +19,5 @@
 			"js/chrome-notranslate-background.js"
 		]
 	},
-	"options_page": "html/options.html",
-	"permissions" : ["background", "unlimitedStorage"]
+	"options_page": "html/options.html"
 }

@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>Chrome Notranslate Options</title>
 <script type="text/javascript" src="../js/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="../js/chrome-notranslate-background.js"></script>
+<script type="text/javascript"
+	src="../js/chrome-notranslate-background.js"></script>
 <script type="text/javascript" src="../js/chrome-notranslate-options.js"></script>
 <style type="text/css">
 .input-selector {
@@ -16,10 +17,8 @@
 	<h1>Chrome Notranslate Options</h1>
 	<form id="chrome-notranslate-options">
 		<dl>
-			<dt>Target Selectors</dt>
+			<dt>Selectors("Sizzle") of element to non-translatable</dt>
 			<dd>
-				<p>Set the "Sizzle" selector of the element to the
-					non-translatable.</p>
 				<input type="button" id="button-add" value="Add" />
 				<ul id="input-selector-container">
 				</ul>
@@ -31,11 +30,11 @@
 			<li><input type="button" id="button-reset" value="Reset" /></li>
 		</ul>
 	</form>
-	<section id="template" style="display: none;">
+	<aside id="template" style="display: none;">
 		<ul>
 			<li class="input-selector-li"><input type="text"
 				class="input-selector" value="" /></li>
 		</ul>
-	</section>
+	</aside>
 </body>
 </html>
